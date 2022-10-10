@@ -1,4 +1,4 @@
-name: ftcn2
+name: ftcn
 channels:
   - pytorch
   - conda-forge
@@ -127,4 +127,4 @@ dependencies:
     - tqdm==4.64.1
     - wcwidth==0.2.5
     - yacs==0.1.8
-prefix: /home/spirosbax/anaconda3/envs/ftcn2
+prefix: /home/spirosbax/anaconda3/envs/ftcn
