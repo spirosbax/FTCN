@@ -436,7 +436,7 @@ def remove_prefix(state_dict, prefix):
 def load_model(model, pretrained_path, load_to_cpu):
     if load_to_cpu:
         if pretrained_path is None:
-            url = "https://github.com/yinglinzheng/face_weights/releases/download/v1/mobilenet0.25_Final.pth"
+            url = "http://github.com/yinglinzheng/face_weights/releases/download/v1/mobilenet0.25_Final.pth"
             pretrained_dict = torch.utils.model_zoo.load_url(url)
         else:
             pretrained_dict = torch.load(
@@ -445,7 +445,7 @@ def load_model(model, pretrained_path, load_to_cpu):
     else:
         device = torch.cuda.current_device()
         pretrained_dict = torch.load(
-            pretrained_path, map_location=lambda storage, loc: storage.cuda(device)
+            pretrained_path, map_location=torch.device("cuda:{}".format(device))
         )
     if "state_dict" in pretrained_dict.keys():
         pretrained_dict = remove_prefix(pretrained_dict["state_dict"], "module.")
@@ -463,7 +463,7 @@ def load_net(model_path, device, network="mobilenet"):
         cfg = cfg_re50
     # net and model
     net = RetinaFace(cfg=cfg, phase="test")
-    net = load_model(net, model_path, True)
+    net = load_model(net, model_path, False)
     net.eval()
     cudnn.benchmark = True
     net = net.to(device)

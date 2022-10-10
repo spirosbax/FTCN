@@ -220,7 +220,7 @@ def temporal_only_conv(module, name, removed, stride_removed=0):
             kernel_size[1] = kernel_size[2] = target_spatial_size
             padding[1] = padding[2] = predefine_padding[target_spatial_size]
 
-            param_dict = {key: getattr(sub_module, key) for key in parameters }
+            param_dict = {key: getattr(sub_module, key, None) for key in parameters }
             
 
             param_dict.update(kernel_size=kernel_size, padding=padding, stride=stride)

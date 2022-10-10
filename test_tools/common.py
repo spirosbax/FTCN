@@ -11,7 +11,7 @@ import cv2
 from .utils import flatten,partition
 
 
-detector = FaceDetector(0)
+detector = FaceDetector(gpu_id=0, model_path="./checkpoints/mobilenet0.25_Final.pth")
 predictor = LandmarkPredictor(0)
 
 
